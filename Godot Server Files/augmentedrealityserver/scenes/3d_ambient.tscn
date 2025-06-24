@@ -1,0 +1,142 @@
+[gd_scene load_steps=11 format=3 uid="uid://dux6hk8pjku1e"]
+
+[ext_resource type="Script" path="res://scripts/Ui.cs" id="1_hg8uj"]
+[ext_resource type="Script" path="res://scripts/Ambient3D.cs" id="1_vvuux"]
+[ext_resource type="PackedScene" uid="uid://c0wg726vop0h6" path="res://virtual_device.tscn" id="2_04d08"]
+[ext_resource type="Material" uid="uid://cnep5t5eqkxes" path="res://holograma.tres" id="3_wwu4n"]
+[ext_resource type="PackedScene" uid="uid://borl6uf7a8s0q" path="res://scenes/central_panel.tscn" id="5_g4j04"]
+
+[sub_resource type="Environment" id="Environment_gf7uy"]
+background_mode = 1
+sky_custom_fov = 5.0
+reflected_light_source = 1
+glow_enabled = true
+glow_intensity = 3.0
+glow_strength = 0.75
+glow_bloom = 0.05
+glow_blend_mode = 1
+glow_hdr_scale = 4.0
+glow_map_strength = 1.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 0.0
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 0.4
+fog_depth_end = 6.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_loi1f"]
+material = ExtResource("3_wwu4n")
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="Curve" id="Curve_wn0o8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.359551, 1), 0.0, 0.0, 0, 0, Vector2(0.837079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ldlva"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8qd63"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="3DAmbient" type="Node3D"]
+script = ExtResource("1_vvuux")
+virtualDevice = ExtResource("2_04d08")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gf7uy")
+
+[node name="Tester" type="SubViewport" parent="."]
+size = Vector2i(240, 240)
+
+[node name="Camera3D" type="Camera3D" parent="Tester"]
+transform = Transform3D(1, 0, 0, 0, 0.982107, 0.188324, 0, -0.188324, 0.982107, 0, 0.755428, 1.97421)
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.982107, 0.188324, 0, -0.188324, 0.982107, 0, 0.755428, 1.97421)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+amount = 500
+lifetime = 20.0
+draw_order = 1
+mesh = SubResource("BoxMesh_loi1f")
+emission_shape = 3
+emission_box_extents = Vector3(4, 3, 4)
+direction = Vector3(0, 0, 0)
+spread = 32.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.1
+angular_velocity_min = 0.1
+angular_velocity_max = 0.2
+radial_accel_min = 0.1
+radial_accel_max = 0.2
+angle_min = -0.5
+angle_max = 3.0
+scale_amount_min = 0.1
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_wn0o8")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+amount = 500
+lifetime = 20.0
+draw_order = 1
+mesh = SubResource("BoxMesh_loi1f")
+emission_shape = 3
+emission_box_extents = Vector3(4, 3, 4)
+direction = Vector3(0, 0, -1)
+spread = 32.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.1
+angular_velocity_min = 0.1
+angular_velocity_max = 0.2
+angle_min = -0.5
+angle_max = 3.0
+scale_amount_min = 0.1
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_wn0o8")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_ldlva")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.886365, 0, -0.462987, 0, 1, 0, 0.462987, 0, 0.886365, 0, 0.062025, 0.368384)
+visible = false
+mesh = SubResource("BoxMesh_8qd63")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.717276, 0.69679, 0, -0.69679, -0.717276, 0, 0, 0)
+shadow_enabled = true
+shadow_normal_bias = 0.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hg8uj")
+
+[node name="ServerStatus" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 60.0
+offset_right = 680.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 30
+text = "Servidor: Offline"
+
+[node name="ClientList" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 122.0
+offset_right = 451.0
+offset_bottom = 594.0
+
+[node name="PainelCentral" parent="." instance=ExtResource("5_g4j04")]
+transform = Transform3D(0.172104, 0, 0.101883, 0, 0.2, 0, -0.101883, 0, 0.172104, -0.868512, 0.526384, -0.446343)

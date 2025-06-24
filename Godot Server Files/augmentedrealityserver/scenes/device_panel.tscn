@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsflgru0q6rjw"]
+
+[ext_resource type="Script" path="res://scripts/DevicePanel.cs" id="1_su47g"]
+[ext_resource type="StyleBox" uid="uid://csl3r2hxvee5i" path="res://scenes/style_panel.tres" id="2_2q7jp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_w17s4"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="DevicePanel" type="Node3D"]
+script = ExtResource("1_su47g")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+texture = SubResource("ViewportTexture_w17s4")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(400, 180)
+
+[node name="PanelContainer" type="PanelContainer" parent="Sprite3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_2q7jp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sprite3D/SubViewport/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DeviceID" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Dispositivo: #"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Col1" type="VBoxContainer" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccX" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "AccX: 0.00"
+
+[node name="Yaw" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Yaw: 0.00"
+
+[node name="Col2" type="VBoxContainer" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccY" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "AccX: 0.00"
+
+[node name="Pitch" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Pitch: 0.00"
+
+[node name="Col3" type="VBoxContainer" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccZ" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "AccX: 0.00"
+
+[node name="Roll" type="Label" parent="Sprite3D/SubViewport/PanelContainer/VBoxContainer/HBoxContainer/Col3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Roll: 0.00
+"

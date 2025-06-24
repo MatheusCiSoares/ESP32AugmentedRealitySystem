@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0wg726vop0h6"]
+
+[ext_resource type="Script" path="res://scripts/VirtualDevice.cs" id="1_6eh7o"]
+[ext_resource type="PackedScene" uid="uid://bsflgru0q6rjw" path="res://scenes/device_panel.tscn" id="2_kpxfp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_psbi0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0laqk"]
+size = Vector3(0.02, 0.02, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_er56c"]
+size = Vector3(0.03, 0.03, 0.03)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qali1"]
+viewport_path = NodePath("DynamicObject/ViewsCombined/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4qe0e"]
+viewport_path = NodePath("DynamicObject/ViewsCombined/SubViewport/Sprite2DL/ViewportL")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xphyy"]
+viewport_path = NodePath("DynamicObject/ViewsCombined/SubViewport/Sprite2DR/ViewportR")
+
+[node name="VirtualDeviceNode" type="Node3D"]
+script = ExtResource("1_6eh7o")
+
+[node name="DevicePanel" parent="." instance=ExtResource("2_kpxfp")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, -0.5)
+
+[node name="DynamicObject" type="CharacterBody3D" parent="."]
+
+[node name="X" type="RayCast3D" parent="DynamicObject"]
+target_position = Vector3(0.5, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="Y" type="RayCast3D" parent="DynamicObject"]
+target_position = Vector3(0, 0.5, 0)
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
+[node name="Z" type="RayCast3D" parent="DynamicObject"]
+target_position = Vector3(0, 0, -0.5)
+debug_shape_custom_color = Color(0, 0.309804, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObject"]
+shape = SubResource("BoxShape3D_psbi0")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="DynamicObject"]
+visible = false
+mesh = SubResource("BoxMesh_0laqk")
+
+[node name="EyeRigL" type="MeshInstance3D" parent="DynamicObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 0, 0)
+mesh = SubResource("BoxMesh_er56c")
+
+[node name="EyeRigR" type="MeshInstance3D" parent="DynamicObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0, 0)
+mesh = SubResource("BoxMesh_er56c")
+
+[node name="ViewsCombined" type="Sprite2D" parent="DynamicObject"]
+position = Vector2(912, 528)
+texture = SubResource("ViewportTexture_qali1")
+
+[node name="SubViewport" type="SubViewport" parent="DynamicObject/ViewsCombined"]
+size = Vector2i(480, 240)
+
+[node name="Sprite2DL" type="Sprite2D" parent="DynamicObject/ViewsCombined/SubViewport"]
+position = Vector2(120, 120)
+texture = SubResource("ViewportTexture_4qe0e")
+
+[node name="ViewportL" type="SubViewport" parent="DynamicObject/ViewsCombined/SubViewport/Sprite2DL"]
+size = Vector2i(240, 240)
+
+[node name="EyeCamL" type="Camera3D" parent="DynamicObject/ViewsCombined/SubViewport/Sprite2DL/ViewportL"]
+fov = 50.0
+
+[node name="Sprite2DR" type="Sprite2D" parent="DynamicObject/ViewsCombined/SubViewport"]
+position = Vector2(360, 120)
+texture = SubResource("ViewportTexture_xphyy")
+
+[node name="ViewportR" type="SubViewport" parent="DynamicObject/ViewsCombined/SubViewport/Sprite2DR"]
+size = Vector2i(240, 240)
+
+[node name="EyeCamR" type="Camera3D" parent="DynamicObject/ViewsCombined/SubViewport/Sprite2DR/ViewportR"]
+fov = 50.0

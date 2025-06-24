@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://borl6uf7a8s0q"]
+
+[ext_resource type="Script" path="res://scripts/CentralPanel.cs" id="1_3aa3w"]
+[ext_resource type="StyleBox" uid="uid://csl3r2hxvee5i" path="res://scenes/style_panel.tres" id="1_ahe00"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvyr2"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="CentralPanel" type="Node3D"]
+script = ExtResource("1_3aa3w")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_gvyr2")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(480, 480)
+
+[node name="PanelContainer" type="PanelContainer" parent="Sprite3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_ahe00")
+
+[node name="ScrollBox" type="ScrollContainer" parent="Sprite3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/ScrollBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LoremIpsum" type="RichTextLabel" parent="Sprite3D/SubViewport/ScrollBox/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0.572549, 1, 1)
+bbcode_enabled = true
+text = "[center][b]Ambiente 3D de Realidade Aumentada[/b]
+
+Desenvolvido por
+[color=#03fceb][b][i]MathCiSo[/i][/b][/color]
+[/center]
+Este é o ambiente virtual de demonstração do meu sistema de realidade aumentada utilizando [i]ESP32[/i] como óculos.
+
+Neste espaço, você pode observar a sincroninação do [i]ESP32[/i] com o servidor, possibilitando a sua movimentação dentro de um espaço virtual que se projeta no mundo real através das lentes do óculos.
+
+Este servidor suporta até 8 óculos conectados, e cada um tem sua própria autonomia dentro do espaço virtual, sem tomar a sincronização do outro.
+
+Embora este servidor tenha sido desenvolvido para trabalhar com o [i]ESP32[/i], é possível que outros dispositivos, se programados para se comunicar da mesma forma, também funcionem aqui, expandindo assim as capacidades futuras do projeto."
+fit_content = true
