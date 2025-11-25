@@ -8,7 +8,7 @@ Um sistema de realidade aumentada DIY utilizando ESP32 e Godot Engine, criando u
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-ESP32-green.svg)
 ![Engine](https://img.shields.io/badge/engine-Godot-478cbf.svg)
-
+  
 
 ## 🎯 Sobre o Projeto
 
@@ -72,13 +72,13 @@ O sistema opera em uma arquitetura cliente-servidor:
 
 -  **Bibliotecas Arduino:**
 		
-- SPI
-- TFT_eSPI **modificada**
-- TJpg_Decoder
-- WiFi (incluída no core ESP32)
-- Adafruit_MPU6050
-- Adafruit_Sensor
-- Wire
+	- SPI
+	- TFT_eSPI **modificada**
+	- TJpg_Decoder
+	- WiFi (incluída no core ESP32)
+	- Adafruit_MPU6050
+	- Adafruit_Sensor
+	- Wire
 
   
 
