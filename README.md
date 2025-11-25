@@ -22,13 +22,7 @@ Um sistema de realidade aumentada DIY utilizando ESP32 e Godot Engine, criando u
 
 - [Instalação](#instalação)
 
-- [Configuração](#configuração)
-
 - [Uso](#uso)
-
-- [Estrutura do Projeto](#estrutura-do-projeto)
-
-- [Contribuindo](#contribuindo)
 
 - [Licença](#licença)
 
