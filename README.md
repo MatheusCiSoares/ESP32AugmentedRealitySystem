@@ -9,24 +9,6 @@ Um sistema de realidade aumentada DIY utilizando ESP32 e Godot Engine, criando u
 ![Platform](https://img.shields.io/badge/platform-ESP32-green.svg)
 ![Engine](https://img.shields.io/badge/engine-Godot-478cbf.svg)
 
-  ## 📋 Índice
-
-  
-- [Sobre o Projeto](#sobre-o-projeto)
-
-- [Arquitetura](#arquitetura)
-
-- [Componentes](#componentes)
-
-- [Como Funciona](#como-funciona)
-
-- [Instalação](#instalação)
-
-- [Uso](#uso)
-
-- [Licença](#licença)
-
-  
 
 ## 🎯 Sobre o Projeto
 
